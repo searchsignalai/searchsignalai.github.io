@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://searchsignalai.github.io/</loc></url>
-  <url><loc>https://searchsignalai.github.io/blog/</loc></url>
-  <url><loc>https://searchsignalai.github.io/blog/seo-guide.html</loc></url>
-  <url><loc>https://searchsignalai.github.io/blog/aeo-guide.html</loc></url>
-  <url><loc>https://searchsignalai.github.io/blog/geo-guide.html</loc></url>
-  <url><loc>https://searchsignalai.github.io/about.html</loc></url>
-  <url><loc>https://searchsignalai.github.io/contact.html</loc></url>
-  <url><loc>https://searchsignalai.github.io/privacy-policy.html</loc></url>
+  <url>
+    <loc>https://searchsignalai.github.io/</loc>
+  </url>
+  <url>
+    <loc>https://searchsignalai.github.io/about.html</loc>
+  </url>
+  <url>
+    <loc>https://searchsignalai.github.io/contact.html</loc>
+  </url>
+  <url>
+    <loc>https://searchsignalai.github.io/privacy-policy.html</loc>
+  </url>
+  <url>
+    <loc>https://searchsignalai.github.io/blog/seo-fundamentals.html</loc>
+  </url>
+  <url>
+    <loc>https://searchsignalai.github.io/blog/answer-engine-optimization.html</loc>
+  </url>
+  <url>
+    <loc>https://searchsignalai.github.io/blog/generative-engine-optimization.html</loc>
+  </url>
 </urlset>
