@@ -207,6 +207,29 @@ h1,h2,h3{font-family:var(--head);line-height:1.15;letter-spacing:-.02em}
 .source.is-us{border-color:rgba(244,197,66,.55);color:var(--text);background:rgba(244,197,66,.07)}
 .source em{margin-left:auto;font-style:normal;color:var(--gold);font-size:11px;font-weight:700}
 
+/* 3D hero stage */
+.stage{position:relative;perspective:1300px;padding:34px 0}
+.tilt{position:relative;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .18s ease-out}
+.tilt>*{transform-style:preserve-3d}
+.plate{position:absolute;inset:4% 2%;border:1px solid var(--border);border-radius:22px;background:rgba(244,197,66,.05)}
+.plate.p1{transform:translateZ(-50px) translate(20px,20px)}
+.plate.p2{transform:translateZ(-110px) translate(40px,40px);background:rgba(255,140,50,.05)}
+.ring{position:absolute;inset:-6% -12%;border:1px dashed rgba(244,197,66,.35);border-radius:50%;animation:spin 26s linear infinite}
+.ring.r2{inset:6% -4%;border-color:rgba(255,140,50,.3);animation-duration:38s;animation-direction:reverse}
+.ring i{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--grad);box-shadow:0 0 18px var(--orange)}
+.ring i:nth-child(1){top:-8px;left:50%}
+.ring i:nth-child(2){top:75%;left:93%}
+.ring i:nth-child(3){top:75%;left:7%}
+@keyframes spin{from{transform:translateZ(-80px) rotateX(70deg) rotateZ(0)}to{transform:translateZ(-80px) rotateX(70deg) rotateZ(360deg)}}
+.tilt .ai-window{position:relative;transform:translateZ(40px)}
+.float{--z:95px;position:absolute;z-index:3;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:12px;background:rgba(28,23,16,.92);border:1px solid rgba(244,197,66,.45);box-shadow:0 18px 40px rgba(0,0,0,.5);font-size:13px;font-weight:600;white-space:nowrap;animation:bob 6s ease-in-out infinite}
+.float i{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.float.f1{top:-4px;right:-18px}
+.float.f2{bottom:96px;left:-30px;--z:130px;animation-delay:-2s}
+.float.f3{bottom:-8px;right:30px;--z:75px;animation-delay:-4s}
+@keyframes bob{0%,100%{transform:translateZ(var(--z)) translateY(0)}50%{transform:translateZ(var(--z)) translateY(-10px)}}
+@media(max-width:560px){.float.f1{right:0}.float.f2{left:0}.ring{display:none}.plate.p2{display:none}}
+
 /* sections */
 .section{padding:84px 0;border-top:1px solid rgba(255,255,255,.05)}
 .section-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:38px}
@@ -324,6 +347,12 @@ details p{padding:0 40px 22px 0;color:var(--muted);font-size:15px;max-width:70ch
         <p class="engines">Built for <b>Google AI Overviews</b>, <b>ChatGPT</b>, <b>Perplexity</b>, <b>Gemini</b> and <b>Copilot</b>.</p>
       </div>
 
+      <div class="stage" id="stage"><div class="tilt" id="tilt">
+        <div class="plate p2" aria-hidden="true"></div><div class="plate p1" aria-hidden="true"></div>
+        <div class="ring" aria-hidden="true"><i></i><i></i><i></i></div><div class="ring r2" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="float f1" aria-hidden="true"><i></i>Cited by AI</div>
+        <div class="float f2" aria-hidden="true"><i></i>Schema valid</div>
+        <div class="float f3" aria-hidden="true"><i></i>Answer box</div>
       <div class="ai-window" aria-label="Example of an AI search answer citing SearchSignal AI">
         <div class="ai-bar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -339,6 +368,7 @@ details p{padding:0 40px 22px 0;color:var(--muted);font-size:15px;max-width:70ch
           </div>
         </div>
       </div>
+      </div></div>
     </div>
   </section>
 
@@ -504,6 +534,15 @@ details p{padding:0 40px 22px 0;color:var(--muted);font-size:15px;max-width:70ch
     })();
   }
   run();
+
+  /* Pointer tilt for the 3D hero */
+  var st=document.getElementById("stage"),ti=document.getElementById("tilt");
+  st.addEventListener("pointermove",function(e){
+    if(e.pointerType!=="mouse")return;
+    var r=st.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    ti.style.setProperty("--ry",(x*14).toFixed(2)+"deg");ti.style.setProperty("--rx",(-y*12).toFixed(2)+"deg");
+  });
+  st.addEventListener("pointerleave",function(){ti.style.setProperty("--ry","0deg");ti.style.setProperty("--rx","0deg")});
 })();
 </script>
 </body>
