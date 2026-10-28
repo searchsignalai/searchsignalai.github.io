@@ -1,1123 +1,510 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>SearchSignal AI | SEO, AEO & GEO Insights</title>
-
-  <meta name="description" content="Explore practical SEO, Answer Engine Optimization and Generative Engine Optimization strategies to improve search visibility and reach your audience.">
-
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0a0907">
-
-  <link rel="canonical" href="https://searchsignalai.github.io/">
-
-  <style>
-    :root {
-      --bg: #0a0907;
-      --surface: #14110c;
-      --surface-light: #1c1710;
-      --gold: #f4c542;
-      --yellow: #ffe47a;
-      --orange: #ff8c32;
-      --text: #f8f4e9;
-      --muted: #aaa398;
-      --border: rgba(244, 197, 66, 0.18);
-      --gradient: linear-gradient(120deg, #ffe47a, #f4b942, #ff8132);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 100px;
-    }
-
-    body {
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button, a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    .container {
-      width: min(1120px, 90%);
-      margin-inline: auto;
-    }
-
-    .gold-text {
-      color: var(--gold);
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--gold);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 22px;
-      height: 2px;
-      background: var(--orange);
-    }
-
-    /* NAVBAR */
-
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(10, 9, 7, 0.94);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-inner {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 11px;
-      font-size: 21px;
-      font-weight: 900;
-      letter-spacing: -0.8px;
-      white-space: nowrap;
-    }
-
-    .logo-mark {
-      display: grid;
-      place-items: center;
-      width: 39px;
-      height: 39px;
-      border-radius: 12px;
-      background: var(--gradient);
-      color: #171007;
-      font-size: 20px;
-      font-weight: 950;
-      box-shadow: 0 0 25px rgba(244, 197, 66, 0.15);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: #c8c1b4;
-      font-size: 13px;
-      font-weight: 650;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--gold);
-    }
-
-    .nav-cta {
-      padding: 10px 17px;
-      border-radius: 8px;
-      background: var(--gradient);
-      color: #171007 !important;
-      font-weight: 850 !important;
-    }
-
-    .menu-toggle {
-      display: none;
-      padding: 8px 12px;
-      color: var(--gold);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    /* HERO */
-
-    .hero {
-      position: relative;
-      isolation: isolate;
-      padding: 105px 0 90px;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      width: 600px;
-      height: 600px;
-      top: -250px;
-      right: -150px;
-      background: rgba(244, 170, 43, 0.10);
-      filter: blur(110px);
-      border-radius: 50%;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 65px;
-      align-items: center;
-    }
-
-    .hero h1 {
-      max-width: 730px;
-      margin: 22px 0;
-      font-size: clamp(42px, 6vw, 70px);
-      line-height: 1.09;
-      letter-spacing: -3px;
-      font-weight: 900;
-    }
-
-    .hero h1 span {
-      background: var(--gradient);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-description {
-      max-width: 590px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.9;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 30px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 13px 20px;
-      border-radius: 9px;
-      font-size: 14px;
-      font-weight: 800;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-    }
-
-    .btn-primary {
-      background: var(--gradient);
-      color: #171007;
-      box-shadow: 0 8px 28px rgba(244, 174, 44, 0.12);
-    }
-
-    .btn-secondary {
-      border: 1px solid var(--border);
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .hero-note {
-      margin-top: 22px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .hero-panel {
-      position: relative;
-      padding: 28px;
-      background: linear-gradient(145deg, #1d1810, #100e0a);
-      border: 1px solid rgba(244, 197, 66, 0.25);
-      border-radius: 20px;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
-    }
-
-    .panel-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .panel-label {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .status-dot {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      margin-right: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-    }
-
-    .signal-item {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-top: 20px;
-      padding: 15px;
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.055);
-      border-radius: 12px;
-    }
-
-    .signal-icon {
-      display: grid;
-      place-items: center;
-      width: 45px;
-      height: 45px;
-      flex-shrink: 0;
-      border-radius: 12px;
-      background: rgba(244, 197, 66, 0.10);
-      color: var(--gold);
-      font-size: 21px;
-      font-weight: 900;
-    }
-
-    .signal-item h3 {
-      font-size: 14px;
-      margin-bottom: 2px;
-    }
-
-    .signal-item p {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .signal-arrow {
-      margin-left: auto;
-      color: var(--orange);
-      font-size: 19px;
-    }
-
-    /* GENERAL SECTIONS */
-
-    section.content-section {
-      padding: 85px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.045);
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 25px;
-      margin-bottom: 35px;
-    }
-
-    .section-heading h2 {
-      margin-top: 12px;
-      font-size: clamp(28px, 4vw, 43px);
-      line-height: 1.2;
-      letter-spacing: -1.5px;
-    }
-
-    .section-heading p {
-      max-width: 410px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* CATEGORIES */
-
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .category-card {
-      position: relative;
-      padding: 28px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      transition: transform 0.25s, border-color 0.25s;
-    }
-
-    .category-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--gold);
-    }
-
-    .category-number {
-      color: var(--orange);
-      font-size: 12px;
-      font-weight: 850;
-      letter-spacing: 2px;
-    }
-
-    .category-card h3 {
-      margin: 15px 0 10px;
-      font-size: 24px;
-    }
-
-    .category-card p {
-      min-height: 78px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.9;
-    }
-
-    .text-link {
-      display: inline-block;
-      margin-top: 19px;
-      color: var(--gold);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    /* ARTICLES */
-
-    .articles-section {
-      background:
-        radial-gradient(ellipse at 100% 0%, rgba(255, 140, 50, 0.045), transparent 45%),
-        var(--bg);
-    }
-
-    .article-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .article-card {
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      transition: transform 0.25s, border-color 0.25s;
-    }
-
-    .article-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(244, 197, 66, 0.55);
-    }
-
-    .article-visual {
-      display: grid;
-      place-items: center;
-      min-height: 155px;
-      background:
-        radial-gradient(circle at 80% 20%, rgba(255, 140, 50, 0.18), transparent 35%),
-        linear-gradient(135deg, #292010, #14110c);
-      color: var(--gold);
-      font-size: 36px;
-      font-weight: 900;
-      letter-spacing: -2px;
-    }
-
-    .article-body {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      padding: 23px;
-    }
-
-    .article-tag {
-      align-self: flex-start;
-      padding: 4px 9px;
-      color: var(--gold);
-      background: rgba(244, 197, 66, 0.09);
-      border-radius: 5px;
-      font-size: 10px;
-      font-weight: 850;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .article-body h3 {
-      margin: 15px 0 10px;
-      font-size: 18px;
-      line-height: 1.5;
-    }
-
-    .article-body p {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.85;
-    }
-
-    .article-body .text-link {
-      margin-top: auto;
-      padding-top: 20px;
-    }
-
-    /* ABOUT */
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      align-items: center;
-      gap: 65px;
-    }
-
-    .about-mark {
-      display: grid;
-      place-items: center;
-      min-height: 290px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background:
-        radial-gradient(circle, rgba(244, 197, 66, 0.14), transparent 55%),
-        var(--surface);
-      color: var(--gold);
-      font-size: 70px;
-      font-weight: 950;
-      letter-spacing: -6px;
-    }
-
-    .about-copy h2 {
-      margin: 15px 0;
-      font-size: clamp(30px, 4vw, 42px);
-      line-height: 1.2;
-      letter-spacing: -1px;
-    }
-
-    .about-copy p {
-      margin-top: 13px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 2;
-    }
-
-    /* CTA */
-
-    .cta-box {
-      position: relative;
-      overflow: hidden;
-      padding: 55px 30px;
-      text-align: center;
-      border: 1px solid rgba(244, 197, 66, 0.3);
-      border-radius: 20px;
-      background:
-        radial-gradient(ellipse at 50% 120%, rgba(255, 140, 50, 0.14), transparent 60%),
-        #15110b;
-    }
-
-    .cta-box h2 {
-      margin: 15px 0;
-      font-size: clamp(27px, 4vw, 42px);
-      line-height: 1.2;
-    }
-
-    .cta-box p {
-      max-width: 570px;
-      margin: 0 auto;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .cta-box .btn {
-      margin-top: 25px;
-    }
-
-    /* FOOTER */
-
-    .footer {
-      padding: 55px 0 20px;
-      border-top: 1px solid var(--border);
-      background: #080706;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr;
-      gap: 50px;
-      padding-bottom: 40px;
-    }
-
-    .footer-about p {
-      max-width: 350px;
-      margin-top: 17px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.9;
-    }
-
-    .footer-column h3 {
-      margin-bottom: 17px;
-      color: var(--gold);
-      font-size: 13px;
-    }
-
-    .footer-column a {
-      display: block;
-      width: fit-content;
-      margin: 10px 0;
-      color: var(--muted);
-      font-size: 13px;
-      transition: color 0.2s;
-    }
-
-    .footer-column a:hover {
-      color: var(--gold);
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.07);
-      color: #81796d;
-      font-size: 11px;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 850px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .hero {
-        padding: 75px 0;
-      }
-
-      .hero-panel {
-        max-width: 550px;
-      }
-
-      .category-grid,
-      .article-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
-      }
-
-      .about-mark {
-        min-height: 210px;
-      }
-
-      .nav-inner {
-        min-height: 70px;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        right: 0;
-        padding: 20px 5%;
-        align-items: stretch;
-        flex-direction: column;
-        gap: 0;
-        background: #0d0b08;
-        border-bottom: 1px solid var(--border);
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-links li a {
-        display: block;
-        padding: 12px 0;
-      }
-
-      .nav-links .nav-cta {
-        display: inline-block;
-        width: fit-content;
-        padding: 10px 16px;
-        margin-top: 8px;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .container {
-        width: 91%;
-      }
-
-      .logo {
-        font-size: 18px;
-      }
-
-      .logo-mark {
-        width: 35px;
-        height: 35px;
-      }
-
-      .hero h1 {
-        font-size: 43px;
-        letter-spacing: -2px;
-      }
-
-      .hero-description {
-        font-size: 14px;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .hero-actions .btn {
-        width: 100%;
-      }
-
-      .hero-panel {
-        padding: 19px;
-      }
-
-      section.content-section {
-        padding: 62px 0;
-      }
-
-      .section-heading {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .category-grid,
-      .article-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .category-card p {
-        min-height: auto;
-      }
-
-      .article-visual {
-        min-height: 135px;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 30px 20px;
-      }
-
-      .footer-about {
-        grid-column: 1 / -1;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .cta-box {
-        padding: 40px 20px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *, *::before, *::after {
-        transition-duration: 0.01ms !important;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>SearchSignal AI | SEO, AEO &amp; GEO Guides for AI Search Visibility</title>
+<meta name="description" content="Practical SEO, Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) guides to help your content rank, get cited and be trusted in AI search.">
+<meta name="keywords" content="SEO, AEO, GEO, answer engine optimization, generative engine optimization, AI search optimization, AI Overviews, ChatGPT SEO, Perplexity SEO, structured data, schema markup, E-E-A-T, topical authority">
+<meta name="author" content="SearchSignal AI">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="theme-color" content="#0a0907">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://searchsignalai.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23f4c542'/%3E%3Cpath d='M18 40c4 6 24 6 24-2s-24-4-24-12 20-8 26-2' fill='none' stroke='%23171007' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SearchSignal AI">
+<meta property="og:title" content="SearchSignal AI | SEO, AEO & GEO Guides for AI Search Visibility">
+<meta property="og:description" content="Learn how to get found in search engines, answer engines and generative AI. Practical SEO, AEO and GEO guides.">
+<meta property="og:url" content="https://searchsignalai.github.io/">
+<meta property="og:image" content="https://searchsignalai.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SearchSignal AI: SEO, AEO and GEO guides">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SearchSignal AI | SEO, AEO & GEO Guides">
+<meta name="twitter:description" content="Get found, get cited, get trusted in AI search.">
+<meta name="twitter:image" content="https://searchsignalai.github.io/assets/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://searchsignalai.github.io/#organization",
+      "name": "SearchSignal AI",
+      "url": "https://searchsignalai.github.io/",
+      "logo": { "@type": "ImageObject", "url": "https://searchsignalai.github.io/assets/logo.png", "width": 512, "height": 512 },
+      "description": "An independent publication about SEO, Answer Engine Optimization and Generative Engine Optimization.",
+      "knowsAbout": ["Search engine optimization", "Answer engine optimization", "Generative engine optimization", "Structured data", "AI search"],
+      "contactPoint": { "@type": "ContactPoint", "contactType": "customer support", "url": "https://searchsignalai.github.io/contact.html" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://searchsignalai.github.io/#website",
+      "url": "https://searchsignalai.github.io/",
+      "name": "SearchSignal AI",
+      "description": "SEO, AEO and GEO insights for the age of AI search.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://searchsignalai.github.io/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://searchsignalai.github.io/#webpage",
+      "url": "https://searchsignalai.github.io/",
+      "name": "SearchSignal AI | SEO, AEO & GEO Guides for AI Search Visibility",
+      "isPartOf": { "@id": "https://searchsignalai.github.io/#website" },
+      "about": { "@id": "https://searchsignalai.github.io/#organization" },
+      "primaryImageOfPage": { "@type": "ImageObject", "url": "https://searchsignalai.github.io/assets/og-image.png" },
+      "breadcrumb": { "@id": "https://searchsignalai.github.io/#breadcrumb" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://searchsignalai.github.io/#breadcrumb",
+      "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://searchsignalai.github.io/" }]
+    },
+    {
+      "@type": "Blog",
+      "@id": "https://searchsignalai.github.io/#blog",
+      "name": "SearchSignal AI Blog",
+      "url": "https://searchsignalai.github.io/#articles",
+      "publisher": { "@id": "https://searchsignalai.github.io/#organization" },
+      "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "SEO Fundamentals: A Practical Starting Guide",
+          "url": "https://searchsignalai.github.io/blog/seo-fundamentals.html",
+          "description": "How keywords, useful content, site structure and technical health support organic search visibility.",
+          "datePublished": "2026-10-29",
+          "author": { "@id": "https://searchsignalai.github.io/#organization" }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "What Is AEO and Why Does It Matter?",
+          "url": "https://searchsignalai.github.io/blog/answer-engine-optimization.html",
+          "description": "How clear answers, helpful formatting and relevant information support answer discovery.",
+          "datePublished": "2026-10-29",
+          "author": { "@id": "https://searchsignalai.github.io/#organization" }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "GEO: Optimizing Content for Generative Search",
+          "url": "https://searchsignalai.github.io/blog/generative-engine-optimization.html",
+          "description": "How clear facts, relevant sources and well-structured content support AI search visibility.",
+          "datePublished": "2026-10-29",
+          "author": { "@id": "https://searchsignalai.github.io/#organization" }
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://searchsignalai.github.io/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between SEO, AEO and GEO?",
+          "acceptedAnswer": { "@type": "Answer", "text": "SEO helps pages rank in traditional search results. AEO structures content so answer engines and featured answers can use it directly. GEO makes content accurate, well-sourced and easy for generative AI systems to understand, cite and summarize." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Answer Engine Optimization (AEO)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "AEO is the practice of writing clear, direct answers to real questions, supported by headings, lists, tables and structured data, so answer engines and voice assistants can find and present them." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Generative Engine Optimization (GEO)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "GEO is the practice of making content easy for AI search tools to retrieve and cite. It relies on accurate facts, named sources, clear structure, author and brand trust signals, and consistent entity information." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does SEO still matter in the age of AI search?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Crawlability, indexing, helpful content and site authority are still the foundation. AI search tools generally draw from content that search systems can already access and trust." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does schema markup help AI search visibility?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Schema markup gives search systems explicit, machine-readable facts about your page, organization and authors. It supports understanding and eligibility for rich results, but it does not guarantee rankings or citations." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#0a0907;--surface:#14110c;--raised:#1c1710;
+  --gold:#f4c542;--orange:#ff8c32;--text:#f8f4e9;--muted:#b3ab9d;
+  --border:rgba(244,197,66,.2);--grad:linear-gradient(120deg,#ffe47a,#f4b942,#ff8132);
+  --head:"Space Grotesk",Inter,system-ui,sans-serif;
+  --body:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.container{width:min(1120px,90%);margin-inline:auto}
+h1,h2,h3{font-family:var(--head);line-height:1.15;letter-spacing:-.02em}
+.skip{position:absolute;left:-999px}
+.skip:focus{left:10px;top:10px;background:var(--gold);color:#171007;padding:8px 12px;z-index:2000;border-radius:6px}
+
+/* nav */
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(10,9,7,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{display:inline-flex;align-items:center;gap:11px;font:700 20px var(--head);white-space:nowrap}
+.logo-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:var(--grad)}
+.logo-mark svg{width:22px;height:22px}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{color:#cfc8ba;font-size:14px;font-weight:600;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-links .nav-cta{padding:9px 16px;border-radius:8px;background:var(--grad);color:#171007;font-weight:700}
+.nav-links .nav-cta:hover{color:#171007}
+.menu-toggle{display:none;padding:8px 12px;color:var(--gold);background:var(--surface);border:1px solid var(--border);border-radius:8px;cursor:pointer}
+
+/* hero */
+.hero{position:relative;isolation:isolate;padding:90px 0 80px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(circle,rgba(244,197,66,.16) 1px,transparent 1.5px) 0 0/28px 28px;
+  -webkit-mask-image:radial-gradient(ellipse at 70% 30%,#000,transparent 65%);mask-image:radial-gradient(ellipse at 70% 30%,#000,transparent 65%)}
+.hero::after{content:"";position:absolute;z-index:-1;width:560px;height:560px;top:-230px;right:-140px;background:rgba(255,140,50,.12);filter:blur(110px);border-radius:50%}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{margin-bottom:22px;font-size:clamp(38px,5.4vw,62px);font-weight:700}
+.lede{max-width:540px;color:var(--muted);font-size:17px;line-height:1.8}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 22px;border-radius:9px;font-size:15px;font-weight:700;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--grad);color:#171007}
+.btn-secondary{border:1px solid var(--border);background:rgba(255,255,255,.03)}
+.engines{margin-top:28px;color:var(--muted);font-size:13px}
+.engines b{color:var(--text);font-weight:600}
+
+/* AI answer window: the one bold moment */
+.ai-window{background:linear-gradient(160deg,#1d1810,#100e0a);border:1px solid rgba(244,197,66,.3);border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.45),0 0 60px rgba(244,170,43,.07);overflow:hidden}
+.ai-bar{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border);font-size:14px}
+.ai-bar svg{flex:none;width:18px;height:18px;color:var(--gold)}
+.query{color:var(--text);min-height:24px}
+.caret{display:inline-block;width:2px;height:1em;margin-left:2px;vertical-align:-2px;background:var(--gold);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.ai-body{padding:20px 20px 22px}
+.ai-label{display:flex;align-items:center;gap:8px;margin-bottom:12px;color:var(--gold);font-size:13px;font-weight:700}
+.ai-label i{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 12px var(--orange)}
+.answer{font-size:15px;line-height:1.75;color:#e9e3d4;min-height:150px}
+.answer sup{color:var(--gold);font-weight:700;font-size:11px;margin-left:2px}
+.sources{display:grid;gap:8px;margin-top:18px}
+.source{display:flex;align-items:center;gap:10px;padding:9px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;font-size:12.5px;color:var(--muted)}
+.source b{display:grid;place-items:center;width:20px;height:20px;border-radius:6px;background:rgba(244,197,66,.12);color:var(--gold);font-size:11px}
+.source.is-us{border-color:rgba(244,197,66,.55);color:var(--text);background:rgba(244,197,66,.07)}
+.source em{margin-left:auto;font-style:normal;color:var(--gold);font-size:11px;font-weight:700}
+
+/* sections */
+.section{padding:84px 0;border-top:1px solid rgba(255,255,255,.05)}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:38px}
+.section-head h2{font-size:clamp(27px,3.8vw,40px);max-width:600px}
+.section-head p{max-width:400px;color:var(--muted);font-size:15px}
+
+/* comparison table */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:16px;background:var(--surface)}
+table{width:100%;min-width:720px;border-collapse:collapse;font-size:14px}
+th,td{padding:20px 22px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(255,255,255,.06)}
+tr:last-child td,tr:last-child th{border-bottom:0}
+thead th{color:var(--muted);font-size:13px;font-weight:600;background:var(--raised)}
+tbody th{font:700 19px var(--head);color:var(--text);width:26%}
+tbody th small{display:block;margin-top:4px;color:var(--gold);font:600 13px var(--body)}
+td{color:var(--muted);line-height:1.7}
+td a{color:var(--gold);font-weight:700}
+
+/* articles */
+.article-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.article-card{display:flex;flex-direction:column;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:14px;transition:border-color .2s}
+.article-card:hover{border-color:rgba(244,197,66,.6)}
+.article-visual{display:grid;place-items:center;min-height:130px;background:radial-gradient(circle at 80% 20%,rgba(255,140,50,.2),transparent 40%),linear-gradient(135deg,#2b2111,#14110c);color:var(--gold);font:700 38px var(--head);letter-spacing:-.04em}
+.article-body{display:flex;flex-direction:column;flex:1;padding:22px}
+.tag{align-self:flex-start;padding:3px 9px;color:var(--gold);background:rgba(244,197,66,.1);border-radius:5px;font-size:12px;font-weight:700}
+.article-body h3{margin:14px 0 10px;font-size:19px;line-height:1.35}
+.article-body p{color:var(--muted);font-size:14px}
+.text-link{margin-top:auto;padding-top:18px;color:var(--gold);font-size:14px;font-weight:700}
+
+/* faq */
+.faq{max-width:820px}
+details{border-bottom:1px solid rgba(255,255,255,.08)}
+summary{display:flex;justify-content:space-between;gap:20px;padding:22px 0;cursor:pointer;list-style:none;font:600 18px var(--head)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--gold);font-size:24px;line-height:1;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 40px 22px 0;color:var(--muted);font-size:15px;max-width:70ch}
+
+/* about + cta */
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.about-grid h2{font-size:clamp(27px,3.8vw,38px);margin-bottom:16px}
+.about-grid p{color:var(--muted);font-size:15px;margin-top:12px;max-width:62ch}
+.cta-box{padding:48px 36px;border:1px solid rgba(244,197,66,.3);border-radius:18px;background:radial-gradient(ellipse at 50% 120%,rgba(255,140,50,.16),transparent 60%),#15110b}
+.cta-box h3{font-size:26px;margin-bottom:12px}
+.cta-box p{margin:0 0 22px;color:var(--muted)}
+
+/* footer */
+.footer{padding:54px 0 20px;border-top:1px solid var(--border);background:#080706}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:38px}
+.footer-about p{max-width:350px;margin-top:16px;color:var(--muted);font-size:14px}
+.footer-col h3{margin-bottom:14px;color:var(--gold);font-size:15px}
+.footer-col a{display:block;width:fit-content;margin:9px 0;color:var(--muted);font-size:14px;transition:color .2s}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;gap:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.07);color:#8d8578;font-size:12px}
+
+@media(max-width:900px){
+  .hero-grid,.about-grid{grid-template-columns:1fr;gap:40px}
+  .article-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .menu-toggle{display:block}
+  .nav-links{display:none;position:absolute;top:72px;left:0;right:0;padding:18px 5%;flex-direction:column;align-items:stretch;gap:0;background:#0d0b08;border-bottom:1px solid var(--border)}
+  .nav-links.open{display:flex}
+  .nav-links li a{display:block;padding:12px 0}
+  .nav-links .nav-cta{width:fit-content;padding:10px 16px;margin-top:8px}
+  .section-head{flex-direction:column;align-items:flex-start;gap:12px}
+}
+@media(max-width:560px){
+  .hero{padding:64px 0}
+  .hero-actions{flex-direction:column}
+  .article-grid{grid-template-columns:1fr}
+  .section{padding:62px 0}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:30px 20px}
+  .footer-about{grid-column:1/-1}
+  .footer-bottom{flex-direction:column;gap:6px}
+  .cta-box{padding:36px 22px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+}
+</style>
 </head>
 
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-  <!-- NAVIGATION -->
-  <header class="navbar">
-    <div class="container nav-inner">
+<header class="navbar">
+  <div class="container nav-inner">
+    <a href="/" class="logo" aria-label="SearchSignal AI homepage">
+      <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#171007" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 15c1.5 2.3 10 2.3 10-.8S6 12 6 9s8-3 10-.8"/></svg></span>
+      <span>SearchSignal AI</span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#topics">SEO vs AEO vs GEO</a></li>
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="contact.html" class="nav-cta">Contact us</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-      <a href="index.html" class="logo" aria-label="SearchSignal AI homepage">
-        <span class="logo-mark">S</span>
-        <span>SearchSignal <span class="gold-text">AI</span></span>
-      </a>
+<main id="main">
 
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        aria-label="Toggle navigation menu"
-        aria-expanded="false"
-        aria-controls="navLinks">
-        ☰ Menu
-      </button>
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div>
+        <h1>Search now answers. Make sure it answers with you.</h1>
+        <p class="lede">Practical SEO, AEO and GEO guides that help your content rank in search, get chosen by answer engines and get cited by AI assistants.</p>
+        <div class="hero-actions">
+          <a href="#articles" class="btn btn-primary">Read the guides</a>
+          <a href="#topics" class="btn btn-secondary">Compare SEO, AEO and GEO</a>
+        </div>
+        <p class="engines">Built for <b>Google AI Overviews</b>, <b>ChatGPT</b>, <b>Perplexity</b>, <b>Gemini</b> and <b>Copilot</b>.</p>
+      </div>
 
-      <nav aria-label="Main navigation">
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#topics">Topics</a></li>
-          <li><a href="#articles">Articles</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="contact.html" class="nav-cta">Contact Us ↗</a></li>
-        </ul>
-      </nav>
-
+      <div class="ai-window" aria-label="Example of an AI search answer citing SearchSignal AI">
+        <div class="ai-bar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <span class="query" id="query">How do I get my content cited in AI search?</span><span class="caret" aria-hidden="true"></span>
+        </div>
+        <div class="ai-body">
+          <div class="ai-label"><i></i> AI answer</div>
+          <p class="answer" id="answer">Lead each page with a direct answer, back claims with named sources, and mark up your content with structured data<sup>1</sup>. Keep facts consistent across your site and profiles so AI systems can trust your brand<sup>2</sup>. Strong SEO fundamentals still decide whether you get retrieved at all<sup>3</sup>.</p>
+          <div class="sources">
+            <div class="source is-us"><b>1</b> searchsignalai.github.io <em>Cited</em></div>
+            <div class="source"><b>2</b> Brand and entity signals</div>
+            <div class="source"><b>3</b> Crawlability and indexing</div>
+          </div>
+        </div>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-
-        <div>
-          <span class="eyebrow">The Future of Search</span>
-
-          <h1>
-            Be Found.
-            <br>
-            Be <span>Trusted.</span>
-            <br>
-            Be the Signal.
-          </h1>
-
-          <p class="hero-description">
-            Practical insights into SEO, Answer Engine Optimization
-            and Generative Engine Optimization. Learn how search is
-            changing and how to make your content easier to discover,
-            understand and trust.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#articles" class="btn btn-primary">
-              Explore Articles <span>↗</span>
-            </a>
-
-            <a href="#topics" class="btn btn-secondary">
-              Discover Our Topics
-            </a>
-          </div>
-
-          <p class="hero-note">
-            Independent insights for a changing search landscape.
-          </p>
-        </div>
-
-        <div class="hero-panel">
-          <div class="panel-top">
-            <div>
-              <strong>Search Intelligence</strong>
-              <p class="panel-label">Three ways to build visibility</p>
-            </div>
-            <span class="panel-label">
-              <span class="status-dot"></span> Explore
-            </span>
-          </div>
-
-          <div class="signal-item">
-            <div class="signal-icon">S</div>
-            <div>
-              <h3>Search Engine Optimization</h3>
-              <p>Build discoverability in search results.</p>
-            </div>
-            <span class="signal-arrow">↗</span>
-          </div>
-
-          <div class="signal-item">
-            <div class="signal-icon">A</div>
-            <div>
-              <h3>Answer Engine Optimization</h3>
-              <p>Make useful answers easy to understand.</p>
-            </div>
-            <span class="signal-arrow">↗</span>
-          </div>
-
-          <div class="signal-item">
-            <div class="signal-icon">G</div>
-            <div>
-              <h3>Generative Engine Optimization</h3>
-              <p>Help AI systems discover relevant information.</p>
-            </div>
-            <span class="signal-arrow">↗</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- TOPICS -->
-    <section class="content-section" id="topics">
-      <div class="container">
-
-        <div class="section-heading">
-          <div>
-            <span class="eyebrow">What We Cover</span>
-            <h2>Three pillars of <span class="gold-text">search.</span></h2>
-          </div>
-          <p>
-            Understand the methods, content practices and technical
-            foundations that help your website reach the right audience.
-          </p>
-        </div>
-
-        <div class="category-grid">
-
-          <article class="category-card">
-            <span class="category-number">01 / SEO</span>
-            <h3>Search Engine Optimization</h3>
-            <p>
-              Explore keyword research, technical SEO, on-page
-              optimization, content strategy and organic search growth.
-            </p>
-            <a href="#articles" class="text-link">Explore SEO →</a>
-          </article>
-
-          <article class="category-card">
-            <span class="category-number">02 / AEO</span>
-            <h3>Answer Engine Optimization</h3>
-            <p>
-              Learn to structure clear answers, improve topical
-              relevance and make content useful for answer engines.
-            </p>
-            <a href="#articles" class="text-link">Explore AEO →</a>
-          </article>
-
-          <article class="category-card">
-            <span class="category-number">03 / GEO</span>
-            <h3>Generative Engine Optimization</h3>
-            <p>
-              Understand how to make accurate, useful content easier
-              for generative AI search experiences to discover and cite.
-            </p>
-            <a href="#articles" class="text-link">Explore GEO →</a>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURED ARTICLES -->
-    <section class="content-section articles-section" id="articles">
-      <div class="container">
-
-        <div class="section-heading">
-          <div>
-            <span class="eyebrow">From The Blog</span>
-            <h2>Ideas worth <span class="gold-text">exploring.</span></h2>
-          </div>
-          <p>
-            Start with the fundamentals, then explore practical ways
-            to improve your content and search visibility.
-          </p>
-        </div>
-
-        <div class="article-grid">
-
-          <article class="article-card">
-            <div class="article-visual">SEO<span class="gold-text">.</span></div>
-            <div class="article-body">
-              <span class="article-tag">SEO Strategy</span>
-              <h3>SEO Fundamentals: A Practical Starting Guide</h3>
-              <p>
-                Learn how keywords, useful content, site structure
-                and technical health support organic search visibility.
-              </p>
-              <a href="blog/seo-fundamentals.html" class="text-link">
-                Read Article →
-              </a>
-            </div>
-          </article>
-
-          <article class="article-card">
-            <div class="article-visual">AEO<span class="gold-text">.</span></div>
-            <div class="article-body">
-              <span class="article-tag">Answer Engines</span>
-              <h3>What Is AEO and Why Does It Matter?</h3>
-              <p>
-                Discover how clear answers, helpful formatting
-                and relevant information support answer discovery.
-              </p>
-              <a href="blog/answer-engine-optimization.html" class="text-link">
-                Read Article →
-              </a>
-            </div>
-          </article>
-
-          <article class="article-card">
-            <div class="article-visual">GEO<span class="gold-text">.</span></div>
-            <div class="article-body">
-              <span class="article-tag">AI Search</span>
-              <h3>GEO: Optimizing Content for Generative Search</h3>
-              <p>
-                Explore how clear facts, relevant sources and
-                well-structured content can support AI search visibility.
-              </p>
-              <a href="blog/generative-engine-optimization.html" class="text-link">
-                Read Article →
-              </a>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="content-section" id="about">
-      <div class="container about-grid">
-
-        <div class="about-mark" aria-hidden="true">
-          S<span class="gold-text">.</span>
-        </div>
-
-        <div class="about-copy">
-          <span class="eyebrow">About SearchSignal AI</span>
-          <h2>Clear insights for a <span class="gold-text">changing search world.</span></h2>
-
-          <p>
-            SearchSignal AI is a publication focused on SEO, AEO and GEO.
-            Our goal is to explain changing search practices in clear,
-            practical language.
-          </p>
-
-          <p>
-            From technical foundations to AI search, we focus on
-            useful information that helps website owners and marketers
-            make better decisions.
-          </p>
-
-          <a href="about.html" class="btn btn-secondary" style="margin-top:22px;">
-            More About Us ↗
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CALL TO ACTION -->
-    <section class="content-section">
-      <div class="container">
-        <div class="cta-box">
-          <span class="eyebrow">Keep Learning</span>
-
-          <h2>Make your next move a <span class="gold-text">smart one.</span></h2>
-
-          <p>
-            Explore the latest articles, build your search knowledge
-            and keep up with the changing world of online discovery.
-          </p>
-
-          <a href="#articles" class="btn btn-primary">
-            Browse the Blog ↗
-          </a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
+  <section class="section" id="topics">
     <div class="container">
-
-      <div class="footer-grid">
-
-        <div class="footer-about">
-          <a href="index.html" class="logo">
-            <span class="logo-mark">S</span>
-            <span>SearchSignal <span class="gold-text">AI</span></span>
-          </a>
-
-          <p>
-            Practical insights on SEO, AEO and GEO.
-            Helping you understand search and create content
-            that people can trust.
-          </p>
-        </div>
-
-        <div class="footer-column">
-          <h3>Explore</h3>
-          <a href="index.html">Home</a>
-          <a href="#topics">Topics</a>
-          <a href="#articles">Articles</a>
-          <a href="about.html">About Us</a>
-        </div>
-
-        <div class="footer-column">
-          <h3>Information</h3>
-          <a href="contact.html">Contact</a>
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="sitemap.xml">XML Sitemap</a>
-        </div>
-
+      <div class="section-head">
+        <h2>SEO, AEO and GEO: what each one does</h2>
+        <p>Three layers of search visibility. Each builds on the one before it.</p>
       </div>
-
-      <div class="footer-bottom">
-        <p>
-          © <span id="year"></span> SearchSignal AI. All rights reserved.
-        </p>
-        <p>Built for better search understanding.</p>
+      <div class="table-wrap">
+        <table>
+          <caption class="skip">Comparison of SEO, AEO and GEO</caption>
+          <thead><tr><th scope="col">Discipline</th><th scope="col">Goal</th><th scope="col">What you work on</th><th scope="col">Guide</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row">SEO<small>Search Engine Optimization</small></th>
+              <td>Rank in search results and earn organic clicks.</td>
+              <td>Keyword research, technical health, on-page content, internal links, authority.</td>
+              <td><a href="blog/seo-fundamentals.html">SEO guide</a></td>
+            </tr>
+            <tr>
+              <th scope="row">AEO<small>Answer Engine Optimization</small></th>
+              <td>Be the direct answer in featured snippets, voice and answer engines.</td>
+              <td>Question-led headings, concise answers, lists, tables, FAQ and schema markup.</td>
+              <td><a href="blog/answer-engine-optimization.html">AEO guide</a></td>
+            </tr>
+            <tr>
+              <th scope="row">GEO<small>Generative Engine Optimization</small></th>
+              <td>Be retrieved, summarized and cited by generative AI tools.</td>
+              <td>Verifiable facts, named sources, author and brand trust, consistent entities.</td>
+              <td><a href="blog/generative-engine-optimization.html">GEO guide</a></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
     </div>
-  </footer>
+  </section>
 
-  <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
+  <section class="section" id="articles">
+    <div class="container">
+      <div class="section-head">
+        <h2>Start with the guides</h2>
+        <p>Fundamentals first, then the newer practices shaping AI search.</p>
+      </div>
+      <div class="article-grid">
+        <article class="article-card">
+          <div class="article-visual" aria-hidden="true">SEO</div>
+          <div class="article-body">
+            <span class="tag">SEO strategy</span>
+            <h3>SEO Fundamentals: A Practical Starting Guide</h3>
+            <p>How keywords, useful content, site structure and technical health support organic search visibility.</p>
+            <a href="blog/seo-fundamentals.html" class="text-link">Read the SEO guide</a>
+          </div>
+        </article>
+        <article class="article-card">
+          <div class="article-visual" aria-hidden="true">AEO</div>
+          <div class="article-body">
+            <span class="tag">Answer engines</span>
+            <h3>What Is AEO and Why Does It Matter?</h3>
+            <p>How clear answers, helpful formatting and relevant information support answer discovery.</p>
+            <a href="blog/answer-engine-optimization.html" class="text-link">Read the AEO guide</a>
+          </div>
+        </article>
+        <article class="article-card">
+          <div class="article-visual" aria-hidden="true">GEO</div>
+          <div class="article-body">
+            <span class="tag">AI search</span>
+            <h3>GEO: Optimizing Content for Generative Search</h3>
+            <p>How clear facts, relevant sources and well-structured content support AI search visibility.</p>
+            <a href="blog/generative-engine-optimization.html" class="text-link">Read the GEO guide</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-    menuToggle.addEventListener("click", function () {
-      const isOpen = navLinks.classList.toggle("open");
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head"><h2>Quick answers</h2></div>
+      <div class="faq">
+        <details open><summary>What is the difference between SEO, AEO and GEO?</summary>
+          <p>SEO helps pages rank in traditional search results. AEO structures content so answer engines and featured answers can use it directly. GEO makes content accurate, well-sourced and easy for generative AI systems to understand, cite and summarize.</p></details>
+        <details><summary>What is Answer Engine Optimization (AEO)?</summary>
+          <p>AEO is the practice of writing clear, direct answers to real questions, supported by headings, lists, tables and structured data, so answer engines and voice assistants can find and present them.</p></details>
+        <details><summary>What is Generative Engine Optimization (GEO)?</summary>
+          <p>GEO is the practice of making content easy for AI search tools to retrieve and cite. It relies on accurate facts, named sources, clear structure, author and brand trust signals, and consistent entity information.</p></details>
+        <details><summary>Does SEO still matter in the age of AI search?</summary>
+          <p>Yes. Crawlability, indexing, helpful content and site authority are still the foundation. AI search tools generally draw from content that search systems can already access and trust.</p></details>
+        <details><summary>Does schema markup help AI search visibility?</summary>
+          <p>Schema markup gives search systems explicit, machine-readable facts about your page, organization and authors. It supports understanding and eligibility for rich results, but it does not guarantee rankings or citations.</p></details>
+      </div>
+    </div>
+  </section>
 
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.innerHTML = isOpen ? "✕ Close" : "☰ Menu";
-    });
+  <section class="section" id="about">
+    <div class="container about-grid">
+      <div>
+        <h2>Clear guidance for a changing search landscape</h2>
+        <p>SearchSignal AI is an independent publication about SEO, AEO and GEO. We explain how search is changing in plain language, from technical foundations to AI search.</p>
+        <p>Every guide focuses on practical steps website owners and marketers can use to make better decisions.</p>
+        <a href="about.html" class="btn btn-secondary" style="margin-top:22px">About SearchSignal AI</a>
+      </div>
+      <div class="cta-box">
+        <h3>Get found, get cited, get trusted.</h3>
+        <p>Pick a guide and start improving how search engines and AI assistants understand your content.</p>
+        <a href="#articles" class="btn btn-primary">Browse the guides</a>
+      </div>
+    </div>
+  </section>
 
-    navLinks.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.innerHTML = "☰ Menu";
-      });
-    });
+</main>
 
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="/" class="logo">
+          <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#171007" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 15c1.5 2.3 10 2.3 10-.8S6 12 6 9s8-3 10-.8"/></svg></span>
+          <span>SearchSignal AI</span>
+        </a>
+        <p>Practical insights on SEO, AEO and GEO, so you can create content that people and AI systems can trust.</p>
+      </div>
+      <nav class="footer-col" aria-label="Explore">
+        <h3>Explore</h3>
+        <a href="#topics">SEO vs AEO vs GEO</a>
+        <a href="#articles">Articles</a>
+        <a href="#faq">FAQ</a>
+        <a href="about.html">About us</a>
+      </nav>
+      <nav class="footer-col" aria-label="Information">
+        <h3>Information</h3>
+        <a href="contact.html">Contact</a>
+        <a href="privacy-policy.html">Privacy policy</a>
+        <a href="sitemap.xml">XML sitemap</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year">2026</span> SearchSignal AI. All rights reserved.</p>
+      <p>Built for better search understanding.</p>
+    </div>
+  </div>
+</footer>
 
+<script>
+(function(){
+  var t=document.getElementById("menuToggle"),n=document.getElementById("navLinks");
+  function set(o){n.classList.toggle("open",o);t.setAttribute("aria-expanded",String(o));t.textContent=o?"Close":"Menu"}
+  t.addEventListener("click",function(){set(!n.classList.contains("open"))});
+  n.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){set(false)})});
+  document.getElementById("year").textContent=new Date().getFullYear();
+
+  /* Typing demo. Full text stays in the HTML for crawlers and reduced-motion users. */
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  var q=document.getElementById("query"),a=document.getElementById("answer");
+  var qText=q.textContent,aHTML=a.innerHTML,words=aHTML.split(/(\s+)/);
+  function run(){
+    q.textContent="";a.innerHTML="";var i=0;
+    (function typeQ(){
+      if(i<qText.length){q.textContent+=qText.charAt(i++);setTimeout(typeQ,28)}
+      else{var w=0,out="";(function typeA(){
+        if(w<words.length){out+=words[w++];a.innerHTML=out;setTimeout(typeA,22)}
+      })()}
+    })();
+  }
+  run();
+})();
+</script>
 </body>
 </html>
