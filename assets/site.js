@@ -1,147 +1,34 @@
-
 document.addEventListener("DOMContentLoaded", async () => {
-  // Load shared header and footer
-  const includeElements = document.querySelectorAll("[data-include]");
-
-  for (const element of includeElements) {
-    const name = element.dataset.include;
-
-    try {
-      const response = await fetch(`/partials/${name}.html`);
-
-      if (!response.ok) {
-        throw new Error(`Could not load ${name}: ${response.status}`);
-      }
-
-      element.innerHTML = await response.text();
-    } catch (error) {
-      console.error(error);
-    }
+  await Promise.all([...document.querySelectorAll("[data-include]")].map(async el => {
+    try { const r = await fetch(`/partials/${el.dataset.include}.html`); if (!r.ok) throw Error(r.status); el.innerHTML = await r.text(); }
+    catch (e) { console.error("Shared component could not load:", e); }
+  }));
+  const toggle = document.getElementById("menuToggle"), nav = document.getElementById("mainNav");
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => { const open = nav.classList.toggle("open"); toggle.setAttribute("aria-expanded", String(open)); });
+    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { nav.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); }));
   }
-
-  // Mobile navigation
-  const menuToggle = document.getElementById("menuToggle");
-  const mainNav = document.getElementById("mainNav");
-
-  if (menuToggle && mainNav) {
-    menuToggle.addEventListener("click", () => {
-      const isOpen = mainNav.classList.toggle("active");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Close navigation" : "Open navigation"
-      );
-    });
-
-    mainNav.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        mainNav.classList.remove("active");
-        menuToggle.setAttribute("aria-expanded", "false");
-      });
-    });
-
-    document.addEventListener("click", (event) => {
-      if (
-        !mainNav.contains(event.target) &&
-        !menuToggle.contains(event.target)
-      ) {
-        mainNav.classList.remove("active");
-        menuToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-
-  // Interactive SEO, AEO and GEO nodes
-  const topicData = {
-    seo: {
-      label: "01 / DISCOVER",
-      title: "Search Engine Optimization",
-      description:
-        "Help search engines discover, crawl and understand your content.",
-      link: "/seo.html",
-      linkText: "Explore SEO"
-    },
-    aeo: {
-      label: "02 / ANSWER",
-      title: "Answer Engine Optimization",
-      description:
-        "Structure useful information so answer engines can identify clear responses.",
-      link: "/aeo.html",
-      linkText: "Explore AEO"
-    },
-    geo: {
-      label: "03 / RECOMMEND",
-      title: "Generative Engine Optimization",
-      description:
-        "Make information clear, verifiable and useful in generative search experiences.",
-      link: "/geo.html",
-      linkText: "Explore GEO"
-    }
+  const topics = {
+    seo: ["01 / DISCOVER","Search Engine Optimization","Help search engines discover, crawl and understand your content.","/seo.html","Explore SEO"],
+    aeo: ["02 / ANSWER","Answer Engine Optimization","Structure useful information so answer engines can identify clear responses.","/aeo.html","Explore AEO"],
+    geo: ["03 / RECOMMEND","Generative Engine Optimization","Make information clear, verifiable and useful in generative search experiences.","/geo.html","Explore GEO"]
   };
-
-  const nodes = document.querySelectorAll(".orbit-node");
-  const infoLabel = document.getElementById("infoLabel");
-  const infoTitle = document.getElementById("infoTitle");
-  const infoText = document.getElementById("infoText");
-  const infoLink = document.getElementById("infoLink");
-
-  nodes.forEach((node) => {
-    node.addEventListener("click", () => {
-      const topic = topicData[node.dataset.topic];
-
-      if (!topic) return;
-
-      nodes.forEach((item) => item.classList.remove("active"));
-      node.classList.add("active");
-
-      const label = document.querySelector(".info-label");
-
-      if (label) label.textContent = topic.label;
-      if (infoTitle) infoTitle.textContent = topic.title;
-      if (infoText) infoText.textContent = topic.description;
-
-      if (infoLink) {
-        infoLink.href = topic.link;
-        infoLink.innerHTML = `${topic.linkText} <span>↗</span>`;
-      }
-    });
-  });
-
-  // Subtle 3D movement with pointer
+  document.querySelectorAll(".node").forEach(node => node.addEventListener("click", () => {
+    const t = topics[node.dataset.topic]; if (!t) return;
+    document.querySelectorAll(".node").forEach(n => n.classList.toggle("active", n === node));
+    document.getElementById("infoLabel").textContent = t[0]; document.getElementById("infoTitle").textContent = t[1];
+    document.getElementById("infoText").textContent = t[2]; const link = document.getElementById("infoLink"); link.href = t[3]; link.textContent = t[4] + " ↗";
+  }));
   const scene = document.querySelector(".universe-scene");
-
-  if (scene && window.matchMedia("(pointer: fine)").matches) {
-    scene.addEventListener("pointermove", (event) => {
-      const rect = scene.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width;
-      const y = (event.clientY - rect.top) / rect.height;
-
-      const rotateY = (x - 0.5) * 12;
-      const rotateX = (0.5 - y) * 10;
-
-      scene.style.setProperty("--mx", `${rotateY}deg`);
-      scene.style.setProperty("--my", `${rotateX}deg`);
-    });
-
-    scene.addEventListener("pointerleave", () => {
-      scene.style.setProperty("--mx", "0deg");
-      scene.style.setProperty("--my", "0deg");
-    });
+  if (scene && matchMedia("(hover:hover) and (pointer:fine)").matches) {
+    scene.addEventListener("pointermove", e => { const r=scene.getBoundingClientRect(); scene.style.setProperty("--rx", `${((e.clientY-r.top)/r.height-.5)*-5}deg`); scene.style.setProperty("--ry", `${((e.clientX-r.left)/r.width-.5)*7}deg`); });
+    scene.addEventListener("pointerleave", () => { scene.style.setProperty("--rx","0deg"); scene.style.setProperty("--ry","0deg"); });
   }
-
-  // WhatsApp popup, if present in the shared footer
-  const whatsappButton = document.getElementById("whatsappButton");
-  const whatsappPopup = document.getElementById("whatsappPopup");
-
-  if (whatsappButton && whatsappPopup) {
-    whatsappButton.addEventListener("click", () => {
-      const isOpen = whatsappPopup.classList.toggle("active");
-      whatsappButton.setAttribute("aria-expanded", String(isOpen));
-    });
-  }
-
-  // Current year
-  document.querySelectorAll("[data-current-year]").forEach((element) => {
-    element.textContent = new Date().getFullYear();
-  });
+  if ("IntersectionObserver" in window) { const ob = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add("visible");ob.unobserve(e.target);} }),{threshold:.12}); document.querySelectorAll(".reveal").forEach(el=>ob.observe(el)); }
+  else document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"));
+  const btn=document.getElementById("whatsappButton"), popup=document.getElementById("whatsappPopup"), close=document.getElementById("whatsappClose");
+  const setOpen=open=>{if(!btn||!popup)return;popup.classList.toggle("open",open);popup.setAttribute("aria-hidden",String(!open));btn.setAttribute("aria-expanded",String(open));};
+  btn?.addEventListener("click",()=>setOpen(!popup.classList.contains("open"))); close?.addEventListener("click",()=>setOpen(false));
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")setOpen(false);});
+  document.querySelectorAll("[data-current-year]").forEach(el=>el.textContent=new Date().getFullYear());
 });
