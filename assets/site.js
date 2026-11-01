@@ -5,11 +5,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   initializeNavigation();
   initializeAnimations();
   initializeTilt();
+  initializeWhatsApp();
   updateCopyrightYear();
 });
 
+
 /* =====================================
-   LOAD SHARED HEADER AND FOOTER
+   LOAD HEADER AND FOOTER
 ===================================== */
 
 async function loadSharedLayout() {
@@ -22,18 +24,17 @@ async function loadSharedLayout() {
       const response = await fetch(`/partials/${name}.html`);
 
       if (!response.ok) {
-        throw new Error(
-          `Unable to load ${name}.html. Status: ${response.status}`
-        );
+        throw new Error(`${name}.html failed: ${response.status}`);
       }
 
       element.innerHTML = await response.text();
 
     } catch (error) {
-      console.error(`Layout loading error:`, error);
+      console.error("Shared layout error:", error);
     }
   }
 }
+
 
 /* =====================================
    MOBILE NAVIGATION
@@ -41,7 +42,7 @@ async function loadSharedLayout() {
 
 function initializeNavigation() {
   const menuToggle = document.querySelector(".menu-toggle");
-  const navLinks = document.querySelector(".nav-links");
+  const navLinks = document.querySelector(".site-header .nav-links");
 
   if (!menuToggle || !navLinks) return;
 
@@ -49,15 +50,31 @@ function initializeNavigation() {
     const isOpen = navLinks.classList.toggle("active");
 
     menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation menu" : "Open navigation menu"
+    );
   });
 
   navLinks.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => {
       navLinks.classList.remove("active");
       menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open navigation menu");
     });
   });
+
+  document.addEventListener("click", event => {
+    if (
+      !menuToggle.contains(event.target) &&
+      !navLinks.contains(event.target)
+    ) {
+      navLinks.classList.remove("active");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+  });
 }
+
 
 /* =====================================
    SCROLL REVEAL ANIMATIONS
@@ -90,6 +107,7 @@ function initializeAnimations() {
   });
 }
 
+
 /* =====================================
    3D TILT EFFECT
 ===================================== */
@@ -117,8 +135,59 @@ function initializeTilt() {
   });
 }
 
+
 /* =====================================
-   DYNAMIC COPYRIGHT YEAR
+   WHATSAPP POPUP
+===================================== */
+
+function initializeWhatsApp() {
+  const toggle = document.getElementById("whatsappToggle");
+  const popup = document.getElementById("whatsappPopup");
+  const close = document.getElementById("whatsappClose");
+  const widget = document.getElementById("whatsappWidget");
+
+  if (!toggle || !popup || !close || !widget) return;
+
+  function openPopup() {
+    popup.classList.add("is-open");
+    popup.setAttribute("aria-hidden", "false");
+    toggle.setAttribute("aria-expanded", "true");
+  }
+
+  function closePopup() {
+    popup.classList.remove("is-open");
+    popup.setAttribute("aria-hidden", "true");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+
+  toggle.addEventListener("click", () => {
+    const isOpen = popup.classList.contains("is-open");
+
+    if (isOpen) {
+      closePopup();
+    } else {
+      openPopup();
+    }
+  });
+
+  close.addEventListener("click", closePopup);
+
+  document.addEventListener("click", event => {
+    if (!widget.contains(event.target)) {
+      closePopup();
+    }
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      closePopup();
+    }
+  });
+}
+
+
+/* =====================================
+   COPYRIGHT YEAR
 ===================================== */
 
 function updateCopyrightYear() {
